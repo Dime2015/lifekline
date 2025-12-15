@@ -6,7 +6,7 @@ import AnalysisResult from './components/AnalysisResult';
 import { UserInput, LifeDestinyResult } from './types';
 import { generateLifeAnalysis } from './services/geminiService';
 import { API_STATUS } from './constants';
-import { Sparkles, AlertCircle, BookOpen, Key } from 'lucide-react';
+import { Sparkles, AlertCircle } from 'lucide-react';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
