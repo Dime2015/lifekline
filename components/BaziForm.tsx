@@ -266,7 +266,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
                     name="birthDate"
                     value={basicInput.birthDate}
                     onChange={handleBasicInputChange}
-                    className="w-full px-3 py-2.5 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-mono"
+                    className="block w-full max-w-full px-3 py-2.5 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-mono"
                   />
                 </div>
                 <div>
@@ -278,7 +278,7 @@ const BaziForm: React.FC<BaziFormProps> = ({ onSubmit, isLoading }) => {
                     name="birthTime"
                     value={basicInput.birthTime}
                     onChange={handleBasicInputChange}
-                    className="w-full px-3 py-2.5 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-mono"
+                    className="block w-full max-w-full px-3 py-2.5 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-mono"
                   />
                 </div>
                 <div>
