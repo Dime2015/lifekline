@@ -8,14 +8,14 @@ const getStemPolarity = (pillar: string): 'YANG' | 'YIN' => {
   const firstChar = pillar.trim().charAt(0);
   const yangStems = ['甲', '丙', '戊', '庚', '壬'];
   const yinStems = ['乙', '丁', '己', '辛', '癸'];
-  
+
   if (yangStems.includes(firstChar)) return 'YANG';
   if (yinStems.includes(firstChar)) return 'YIN';
   return 'YANG'; // fallback
 };
 
 export const generateLifeAnalysis = async (input: UserInput): Promise<LifeDestinyResult> => {
-  
+
   const { apiKey, apiBaseUrl, modelName } = input;
 
   if (!apiKey || !apiKey.trim()) {
@@ -32,7 +32,7 @@ export const generateLifeAnalysis = async (input: UserInput): Promise<LifeDestin
 
   const genderStr = input.gender === Gender.MALE ? '男 (乾造)' : '女 (坤造)';
   const startAgeInt = parseInt(input.startAge) || 1;
-  
+
   // Calculate Da Yun Direction accurately
   const yearStemPolarity = getStemPolarity(input.yearPillar);
   let isForward = false;
@@ -44,9 +44,9 @@ export const generateLifeAnalysis = async (input: UserInput): Promise<LifeDestin
   }
 
   const daYunDirectionStr = isForward ? '顺行 (Forward)' : '逆行 (Backward)';
-  
-  const directionExample = isForward 
-    ? "例如：第一步是【戊申】，第二步则是【己酉】（顺排）" 
+
+  const directionExample = isForward
+    ? "例如：第一步是【戊申】，第二步则是【己酉】（顺排）"
     : "例如：第一步是【戊申】，第二步则是【丁未】（逆排）";
 
   const userPrompt = `
@@ -64,7 +64,7 @@ export const generateLifeAnalysis = async (input: UserInput): Promise<LifeDestin
     时柱：${input.hourPillar}
     
     【大运核心参数】
-    1. 起运年龄：${input.startAge} 岁 (虚岁)。
+    1. 起运年龄：${input.startAge} 岁 (周岁/实岁)。
     2. 第一步大运：${input.firstDaYun}。
     3. **排序方向**：${daYunDirectionStr}。
     
@@ -75,11 +75,13 @@ export const generateLifeAnalysis = async (input: UserInput): Promise<LifeDestin
     2. **计算序列**：根据六十甲子顺序和方向（${daYunDirectionStr}），推算出接下来的 9 步大运。
        ${directionExample}
     3. **填充 JSON**：
-       - Age 1 到 ${startAgeInt - 1}: daYun = "童限"
-       - Age ${startAgeInt} 到 ${startAgeInt + 9}: daYun = [第1步大运: ${input.firstDaYun}]
-       - Age ${startAgeInt + 10} 到 ${startAgeInt + 19}: daYun = [第2步大运]
-       - Age ${startAgeInt + 20} 到 ${startAgeInt + 29}: daYun = [第3步大运]
-       - ...以此类推直到 100 岁。
+    3. **填充 JSON**：
+       - Age 1 到 ${startAgeInt}: daYun = "童限"
+       - Age ${startAgeInt + 1} 到 ${startAgeInt + 10}: daYun = [第1步大运: ${input.firstDaYun}]
+       - Age ${startAgeInt + 11} 到 ${startAgeInt + 20}: daYun = [第2步大运]
+       - Age ${startAgeInt + 21} 到 ${startAgeInt + 30}: daYun = [第3步大运]
+       - ...以此类推直到 100 岁.
+       (注意：输入的起运年龄为周岁，对应虚岁通常+1。例如6岁起运，则虚岁7岁开始上大运)
     
     【特别警告】
     - **daYun 字段**：必须填大运干支（10年一变），**绝对不要**填流年干支。
@@ -102,7 +104,7 @@ export const generateLifeAnalysis = async (input: UserInput): Promise<LifeDestin
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: targetModel, 
+        model: targetModel,
         messages: [
           { role: "system", content: BAZI_SYSTEM_INSTRUCTION },
           { role: "user", content: userPrompt }

@@ -53,7 +53,7 @@ const App: React.FC = () => {
           </div>
           <div className="flex items-center gap-6">
             <div className="hidden md:block text-sm text-gray-400 font-medium bg-gray-100 px-3 py-1 rounded-full">
-               基于 AI 大模型驱动 推特@0xSakura666
+              基于 AI 大模型驱动
             </div>
           </div>
         </div>
@@ -61,13 +61,13 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12 flex flex-col gap-12">
-        
+
         {/* If no result, show intro and form */}
         {!result && (
           <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8 animate-fade-in">
             <div className="text-center max-w-2xl flex flex-col items-center">
               <h2 className="text-4xl md:text-5xl font-serif-sc font-bold text-gray-900 mb-6">
-                洞悉命运起伏 <br/>
+                洞悉命运起伏 <br />
                 <span className="text-indigo-600">预见人生轨迹</span>
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
@@ -79,7 +79,7 @@ const App: React.FC = () => {
               {/* Tutorial Buttons Group */}
               <div className="flex flex-row gap-4 w-full max-w-lg mb-4">
                 {/* Usage Tutorial */}
-                <a 
+                <a
                   href="https://jcnjmxofi1yl.feishu.cn/wiki/OPa4woxiBiFP9okQ9yWcbcXpnEw"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -92,7 +92,7 @@ const App: React.FC = () => {
                 </a>
 
                 {/* API Tutorial */}
-                <a 
+                <a
                   href="https://jcnjmxofi1yl.feishu.cn/wiki/JX0iwzoeqie3GEkJ8XQcMesan3c"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -105,7 +105,7 @@ const App: React.FC = () => {
                 </a>
               </div>
             </div>
-            
+
             <BaziForm onSubmit={handleFormSubmit} isLoading={loading} />
 
             {error && (
@@ -120,24 +120,24 @@ const App: React.FC = () => {
         {/* Results View */}
         {result && (
           <div className="animate-fade-in space-y-12">
-            
+
             <div className="flex justify-between items-center border-b pb-4">
-               <h2 className="text-2xl font-bold font-serif-sc text-gray-800">
-                 {userName ? `${userName}的` : ''}命盘分析报告
-               </h2>
-               <button 
-                 onClick={() => setResult(null)}
-                 className="text-indigo-600 hover:text-indigo-800 font-medium text-sm"
-               >
-                 ← 重新排盘
-               </button>
+              <h2 className="text-2xl font-bold font-serif-sc text-gray-800">
+                {userName ? `${userName}的` : ''}命盘分析报告
+              </h2>
+              <button
+                onClick={() => setResult(null)}
+                className="text-indigo-600 hover:text-indigo-800 font-medium text-sm"
+              >
+                ← 重新排盘
+              </button>
             </div>
 
             {/* The Chart */}
             <section className="space-y-4">
               <h3 className="text-xl font-bold text-gray-700 flex items-center gap-2">
-                 <span className="w-1 h-6 bg-indigo-600 rounded-full"></span>
-                 流年大运走势图 (100年)
+                <span className="w-1 h-6 bg-indigo-600 rounded-full"></span>
+                流年大运走势图 (100年)
               </h3>
               <p className="text-sm text-gray-500 mb-2">
                 <span className="text-green-600 font-bold">绿色K线</span> 代表运势上涨（吉），
@@ -149,7 +149,7 @@ const App: React.FC = () => {
 
             {/* The Text Report */}
             <section>
-               <AnalysisResult analysis={result.analysis} />
+              <AnalysisResult analysis={result.analysis} />
             </section>
           </div>
         )}
@@ -158,7 +158,7 @@ const App: React.FC = () => {
       {/* Footer */}
       <footer className="w-full bg-gray-900 text-gray-400 py-8 mt-auto">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} 人生K线项目 推特@0xSakura666 | 仅供娱乐与文化研究，请勿迷信</p>
+          <p>&copy; {new Date().getFullYear()} 人生K线项目 | 仅供娱乐与文化研究，请勿迷信</p>
         </div>
       </footer>
     </div>
