@@ -1,6 +1,7 @@
 
 import { UserInput, LifeDestinyResult, Gender } from "../types";
 import { BAZI_SYSTEM_INSTRUCTION } from "../constants";
+import { Solar } from 'lunar-javascript';
 
 // Helper to determine stem polarity
 const getStemPolarity = (pillar: string): 'YANG' | 'YIN' => {
@@ -133,6 +134,35 @@ export const generateLifeAnalysis = async (input: UserInput): Promise<LifeDestin
     if (!data.chartPoints || !Array.isArray(data.chartPoints)) {
       throw new Error("模型返回的数据格式不正确（缺失 chartPoints）。");
     }
+
+    // --- Post-Processing: Enforce Year and GanZhi Accuracy ---
+    // AI often hallucinates the start year or GanZhi. We must strictly calculate it.
+    const birthYearInt = parseInt(input.birthYear);
+    if (!isNaN(birthYearInt)) {
+      data.chartPoints = data.chartPoints.map((point: any) => {
+        const calculatedYear = birthYearInt + (point.age - 1);
+
+        // Calculate GanZhi for this year (Using mid-year to be safe for Li Chun)
+        // We need to import Solar. If not available, we rely on AI but fix the year at least.
+        // Assuming Solar is imported.
+        let calculatedGanZhi = point.ganZhi;
+        try {
+          const solar = Solar.fromYmd(calculatedYear, 6, 1);
+          const lunar = solar.getLunar();
+          calculatedGanZhi = lunar.getYearInGanZhiExact();
+        } catch (e) {
+          // Fallback to AI's value if calc fails, but Year is fixed.
+          console.warn("GanZhi calc failed", e);
+        }
+
+        return {
+          ...point,
+          year: calculatedYear,
+          ganZhi: calculatedGanZhi
+        };
+      });
+    }
+    // ---------------------------------------------------------
 
     return {
       chartData: data.chartPoints,

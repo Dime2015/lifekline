@@ -1,0 +1,55 @@
+{
+  "hash": "39107aa6",
+  "configHash": "5b992d3e",
+  "lockfileHash": "3d605700",
+  "browserHash": "7c541c86",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "8c49ebac",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "bbe878d6",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "28eb1423",
+      "needsInterop": true
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "7d4c687a",
+      "needsInterop": false
+    },
+    "recharts": {
+      "src": "../../node_modules/recharts/es6/index.js",
+      "file": "recharts.js",
+      "fileHash": "4221ae4d",
+      "needsInterop": false
+    },
+    "lunar-javascript": {
+      "src": "../../node_modules/lunar-javascript/index.js",
+      "file": "lunar-javascript.js",
+      "fileHash": "7d38fce9",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-ERLRPAAT": {
+      "file": "chunk-ERLRPAAT.js"
+    },
+    "chunk-PAMVEWRW": {
+      "file": "chunk-PAMVEWRW.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
+}
